@@ -14,9 +14,15 @@ def user_cread(base_url, headers):
 		soup = bs(request.content, 'html.parser')
 		pages = soup.find('div', attrs = {'class': 'blog-record-description'})
 		contents = pages.text
-		contents = content.split('.')
-                return contents
-        else:
+		return contents
+	else:
 		print('Error')
 
-user_cread(base_url, headers)	    
+def text(text):
+	text = text.split('.')
+	for i in text:
+		print(i)
+	
+
+
+text(user_cread(base_url, headers))	    
