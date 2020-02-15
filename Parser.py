@@ -6,9 +6,10 @@ headers = {'accept': '*/*',
 
 base_url = 'https://www.srosa.ru/voda/produktsija'
 
-def user_cread(base_url, headers):
-	session = requests.Session()
-	request = session.get(base_url, headers=headers)
+session = requests.Session()
+request = session.get(base_url, headers=headers)
+
+def user_cread(base_url):
 	if request.status_code == 200:
 		print('Code 2007')
 		soup = bs(request.content, 'html.parser')
@@ -25,4 +26,21 @@ def text(text):
 	
 
 
-text(user_cread(base_url, headers))	    
+text(user_cread(base_url))	    
+
+
+def list_menu(html):
+	if request.status_code == 200:
+		print('Code 2007')
+		soup = bs(request.content, 'html.parser')
+		pages = soup.find_all('ul', attrs = {'class': 'nav navbar-nav hidden-app'})
+		for i in pages:
+			print(i.text)
+			drop_item = soup.find_all('a')
+			print(drop_item.text)
+			print(drop_item['href'])
+	else:
+		print('error')
+
+
+list_menu(base_url)
