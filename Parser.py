@@ -4,12 +4,22 @@ from bs4 import BeautifulSoup as bs
 headers = {'accept': '*/*', 
 	    'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/82.0.4056.3 Safari/537.36'}
 
-base_url = 'https://www.srosa.ru/voda/produktsija'
+stable_url = 0
+catalog_url = 0
+
+def url_creater(stable_url, catalog_url):
+	stable_url = 'https://www.srosa.ru/'
+	catalog_url = 'voda/produktsija'
+	base_url = stable_url + catalog_url
+	print('Итоговая ссылка: ' + base_url)
+	return base_url
+
+base_url = url_creater(stable_url, catalog_url)
 
 session = requests.Session()
 request = session.get(base_url, headers=headers)
 
-def user_cread(base_url):
+def card_discription(base_url):
 	if request.status_code == 200:
 		print('Code 2007')
 		soup = bs(request.content, 'html.parser')
@@ -26,7 +36,7 @@ def text(text):
 	
 
 
-text(user_cread(base_url))	    
+text(card_discription(base_url))	    
 
 
 def list_menu(html):
