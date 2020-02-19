@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
+from random import choice, uniform
+from time import sleep
 
 headers = {'accept': '*/*', 
 	    'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/82.0.4056.3 Safari/537.36'}
@@ -42,13 +44,17 @@ text(card_discription(base_url))
 def list_menu(html):
 	if request.status_code == 200:
 		print('Code 2007')
+		sleep(uniform(3,6))
 		soup = bs(request.content, 'html.parser')
 		pages = soup.find_all('ul', attrs = {'class': 'nav navbar-nav hidden-app'})
 		for i in pages:
-			print(i.text)
-			drop_item = soup.find_all('a')
-			print(drop_item.text)
-			print(drop_item['href'])
+			try:
+				print(i.text)
+				drop_item = soup.find_all('a')
+				print(drop_item.text)
+			except:
+				print('---')
+
 	else:
 		print('error')
 
